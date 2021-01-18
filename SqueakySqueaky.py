@@ -1,6 +1,6 @@
 '''
-Data  wrangling functions to supplement pandas.
-Intention is to cleanly abstract procedures for piping within method chains for legible data wrangling.
+Data  wrangling functions to supplement pandas
+Intention is to cleanly abstract procedures for piping within method chains
 
 Example:
 
