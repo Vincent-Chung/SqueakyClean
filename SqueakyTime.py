@@ -1,9 +1,8 @@
 '''
-Data  wrangling functions to supplement pandas.
-Intention is to cleanly abstract procedures for piping within method chains for legible data wrangling.
+Data  wrangling functions to supplement pandas
+Intention is to cleanly abstract procedures for piping within method chains
 
 Example:
-
 df_new = (df_original
           .pipe(ColKeepie, ColList = ['vendorMasterCode','ElectronicsFlag','TransactionDate'])
           .rename(columns={"vendorMasterCode" : "vendorCode"})
