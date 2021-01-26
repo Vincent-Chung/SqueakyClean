@@ -61,3 +61,9 @@ def DeleteRowsContains(df, Col, Contains):
     df = df[df.ContainsFlag != True]
     df = df.drop(['ContainsFlag'], axis = 1)
     return df
+
+def KeepRowsContains(df, Col, Contains):
+    df['ContainsFlag'] = df[Col].str.contains(Contains)
+    df = df[df.ContainsFlag == True]
+    df = df.drop(['ContainsFlag'], axis = 1)
+    return df
