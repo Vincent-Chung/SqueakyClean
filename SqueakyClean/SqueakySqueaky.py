@@ -55,3 +55,9 @@ def DataTypeSwitcheroo(df, Col, Type):
     else:
         df[Col] = df[Col].astype(Type)
     return df
+
+def DeleteRowsContains(df, Col, Contains):
+    df['ContainsFlag'] = df[Col].str.contains(Contains)
+    df = df[df.ContainsFlag != True]
+    df = df.drop(['ContainsFlag'], axis = 1)
+    return df
