@@ -12,13 +12,10 @@ df_new = (df_original
           )
 '''
 
-
+# External dependencies
 import pandas as pd
 
-#################
-#
-# General
-#
+
 def ColKeepie(df, ColList):
     '''
     Input Types:
