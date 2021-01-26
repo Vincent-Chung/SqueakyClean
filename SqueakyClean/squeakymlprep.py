@@ -7,6 +7,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 
+def NormFunc(df, ColData, NewCol):
+    '''
+    
+    '''
+    df[NewCol] = (df[ColData] - min(df[ColData])) / (max(df[ColData]) - min(df[ColData]))
+    return df
+
 def OneHotEncode(df, Col):
     temp_df = pd.get_dummies(df[Col],drop_first = True)
     df = df.merge(temp_df, left_index = True, right_index = True)
