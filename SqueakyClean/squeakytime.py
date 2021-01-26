@@ -12,14 +12,17 @@ df_new = (df_original
 '''
 import pandas as pd
 
-#################
-#
-# Time
-#
 def FilterBetweenDates(df, ColSelectionDate, ColStartDate, ColEndDate):
     # This function doesn't work with int
     df[ColSelectionDate] = df[ColSelectionDate].astype(float)  
     df[ColStartDate] = df[ColStartDate].astype(float)
     df[ColEndDate] = df[ColEndDate].astype(float)   
     df = df[df[ColSelectionDate].between(df[ColStartDate], df[ColEndDate])]   
+    return df
+
+def CalcDuration(df, NewColName, ColStartDate, ColEndDate):
+    df[ColStartDate] = pd.to_datetime(df[ColStartDate], format='%Y%m%d')
+    df[ColEndDate] = pd.to_datetime(df[ColEndDate], format='%Y%m%d')
+    df[NewColName] = df[ColEndDate] - df[ColStartDate]
+    df[NewColName] = df[NewColName].dt.days
     return df
