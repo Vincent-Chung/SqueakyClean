@@ -26,6 +26,17 @@ def ColKeepie(df, ColList):
     '''
     return df[ColList]
 
+def ColDroppie(df,ColList):
+    '''
+    Input Types:
+        df = Pandas DataFrame
+        ColList = list type ['a','b','c','d']
+    Returns:
+        Pandas dataframe removing all columns of dataframe as defined with ColList arg
+    '''
+    df = df.drop(ColList, axis = 1)
+    return df
+
 def DataTypeSwitcheroo(df, Col, Type):
     '''
     Input Types:
