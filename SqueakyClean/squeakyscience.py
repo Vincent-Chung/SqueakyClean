@@ -49,7 +49,7 @@ def ConvertQuantile(df, Col, Groups):
     Returns:
         Pandas dataframe containing user defined column (Col) converted to discrete equal-sized buckets
     '''
-    df[col] = pd.qcut(df[col].values, Groups)
+    df[Col] = pd.qcut(df[Col].values, Groups)
     return df
 
 def ConvertMinMaxNorm(df, Col):
