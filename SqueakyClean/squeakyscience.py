@@ -1,5 +1,8 @@
 # Functions to help with preparing dataset for analytics, data science, machine learning
 
+#-------------------------------------------
+
+# Packages
 import pandas as pd
 import numpy as np
 
@@ -7,21 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 
-def NormMinMax(df, ColData, NewCol):
-    '''
-    For posterity: this function was formally written as "scale_me_baby" in partnership with MSBA Team 2 at the University of Notre Dame, circa 2018.
-    
-    Input Types:
-        df = Pandas DataFrame
-        ColData = As string, defines column for desired normalization
-        NewCol = As string, name of new column that contains normalized data
-    Returns:
-        Pandas dataframe containing additional column (NewCol) with normalized data of user-defined ColData.
-        This uses the min-max normalization method. 
-    '''
-    df[NewCol] = (df[ColData] - min(df[ColData])) / (max(df[ColData]) - min(df[ColData]))
-    return df
-
+# Functions
 def QuantileMaker(df, Col, Groups):
     df[col] = pd.qcut(df[col].values, Groups)
     return df
@@ -54,3 +43,18 @@ def TFIDF_Clusters(df, Col, ColName, K, KeepPct):
     
     df2 = df2.drop([Col], axis = 1)
     return df2
+
+def NormMinMax(df, ColData, NewCol):
+    '''
+    For posterity: this function was formally written as "scale_me_baby" in partnership with MSBA Team 2 at the University of Notre Dame, circa 2018.
+    
+    Input Types:
+        df = Pandas DataFrame
+        ColData = As string, defines column for desired normalization
+        NewCol = As string, name of new column that contains normalized data
+    Returns:
+        Pandas dataframe containing additional column (NewCol) with normalized data of user-defined ColData.
+        This uses the min-max normalization method. 
+    '''
+    df[NewCol] = (df[ColData] - min(df[ColData])) / (max(df[ColData]) - min(df[ColData]))
+    return df
