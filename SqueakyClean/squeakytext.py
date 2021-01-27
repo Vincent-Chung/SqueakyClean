@@ -15,10 +15,6 @@ df_new = (df_original
 
 import pandas as pd
 
-#################
-#
-# Text
-#
 def SubstringLeft(df, Col, SplitChar):
     '''
     Input Types:
@@ -46,6 +42,12 @@ def SubstringRight(df, Col, SplitChar):
     new = df[Col].str.split(SplitChar, n = 1, expand = True) 
     df[Col] = new[1]
     df[Col] = df[Col].str.strip() # Remove White Spaces
+    return df
+
+def SubString_Middle(df, Col, Start, End):
+    # Returns substring based on defined start and end positions
+    # Use true counting for both Start and End positions, i.e. count 1, 2, 3, 4 etc... for both start and end positions
+    df[Col] = df[Col].str[Start - 1 : End]
     return df
 
 def FindReplace(df, Col, OldString, NewString):
