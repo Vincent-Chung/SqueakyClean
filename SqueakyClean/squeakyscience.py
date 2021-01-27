@@ -22,6 +22,10 @@ def NormMinMax(df, ColData, NewCol):
     df[NewCol] = (df[ColData] - min(df[ColData])) / (max(df[ColData]) - min(df[ColData]))
     return df
 
+def QuantileMaker(df, Col, Groups):
+    df[col] = pd.qcut(df[col].values, Groups)
+    return df
+
 def OneHotEncode(df, Col):
     temp_df = pd.get_dummies(df[Col],drop_first = True)
     df = df.merge(temp_df, left_index = True, right_index = True)
