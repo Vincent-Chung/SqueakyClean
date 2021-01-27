@@ -40,21 +40,28 @@ def TFIDF_Clusters(df, Col, ColName, K, KeepPct):
     df2 = df2.drop([Col], axis = 1)
     return df2
 
-def QuantileConvert(df, Col, Groups):
+def ConvertQuantile(df, Col, Groups):
+    '''
+    Input Types:
+        df = Pandas DataFrame
+        Col = Numeric field. Entered as string, defines column for quantile conversion
+        Groups = Entered as int, controls amount of equal-sized groups
+    Returns:
+        Pandas dataframe containing user defined column (Col) converted to discrete equal-sized buckets
+    '''
     df[col] = pd.qcut(df[col].values, Groups)
     return df
 
-def NormMinMax(df, ColData, NewCol):
+def ConvertMinMaxNorm(df, Col):
     '''
     For posterity: this function was formally written as "scale_me_baby" in partnership with MSBA Team 2 at the University of Notre Dame, circa 2018.
     
     Input Types:
         df = Pandas DataFrame
-        ColData = As string, defines column for desired normalization
-        NewCol = As string, name of new column that contains normalized data
+        Col = Numeric field. Entered as string, defines column for normalization conversion
     Returns:
-        Pandas dataframe containing additional column (NewCol) with normalized data of user-defined ColData.
+        Pandas dataframe containing user defined column (Col) converted to normalized data
         This uses the min-max normalization method. 
     '''
-    df[NewCol] = (df[ColData] - min(df[ColData])) / (max(df[ColData]) - min(df[ColData]))
+    df[Col] = (df[Col] - min(df[Col])) / (max(df[Col]) - min(df[Col]))
     return df
