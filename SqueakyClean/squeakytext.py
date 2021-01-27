@@ -44,7 +44,7 @@ def SubstringRight(df, Col, SplitChar):
     df[Col] = df[Col].str.strip() # Remove White Spaces
     return df
 
-def SubString_Middle(df, Col, Start, End):
+def SubStringMiddle(df, Col, Start, End):
     # Returns substring based on defined start and end positions
     # Use true counting for both Start and End positions, i.e. count 1, 2, 3, 4 etc... for both start and end positions
     df[Col] = df[Col].str[Start - 1 : End]
