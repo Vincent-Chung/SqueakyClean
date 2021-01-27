@@ -1,4 +1,4 @@
-# Functions to help with preparing dataset for ML
+# Functions to help with preparing dataset for analytics
 
 import pandas as pd
 import numpy as np
