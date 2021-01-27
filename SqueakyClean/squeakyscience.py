@@ -44,7 +44,7 @@ def ConvertQuantile(df, Col, Groups):
     '''
     Input Types:
         df = Pandas DataFrame
-        Col = Numeric field. Entered as string, defines column for quantile conversion
+        Col = Entered as string, defines number of quantiles. Only works on numeric fields
         Groups = Entered as int, controls amount of equal-sized groups
     Returns:
         Pandas dataframe containing user defined column (Col) converted to discrete equal-sized buckets
