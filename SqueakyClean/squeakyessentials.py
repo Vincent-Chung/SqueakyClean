@@ -8,7 +8,7 @@ df_new = (df_original
           .pipe(ColKeepie, ColList = ['vendorMasterCode','ElectronicsFlag','TransactionDate'])
           .rename(columns={"vendorMasterCode" : "vendorCode"})
           .query('ElectronicsFlag == 1')
-          .pipe(Last90Days, DateColumn = 'TransactionDate')
+          .pipe(ColDroppie, ColList = ['ElectronicsFlag','TransactionDatet'])
           )
 '''
 
