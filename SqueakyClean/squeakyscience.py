@@ -53,7 +53,7 @@ def CalcQuantile(df, Col, NewCol, Groups):
     df[NewColCol] = pd.qcut(df[Col].values, Groups).code + 1
     return df
 
-def CalcMinMaxNorm(df, Col):
+def CalcMinMaxNorm(df, Col, NewCol):
     '''
     For posterity: this function was formally written as "scale_me_baby" in partnership with MSBA Team 2 at the University of Notre Dame, circa 2018.
     
