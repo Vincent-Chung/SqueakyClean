@@ -50,7 +50,7 @@ def CalcQuantile(df, Col, NewCol, Groups):
     Returns:
         Pandas dataframe containing user defined column (Col) converted to discrete equal-sized buckets
     '''
-    df[NewColCol] = pd.qcut(df[Col].values, Groups).code + 1
+    df[NewCol] = pd.qcut(df[Col].values, Groups).code + 1
     return df
 
 def CalcMinMaxNorm(df, Col, NewCol):
