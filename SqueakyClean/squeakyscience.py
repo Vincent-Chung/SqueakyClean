@@ -40,28 +40,30 @@ def TFIDF_Clusters(df, Col, ColName, K, KeepPct):
     df2 = df2.drop([Col], axis = 1)
     return df2
 
-def ConvertQuantile(df, Col, Groups):
+def CalcQuantile(df, Col, NewCol, Groups):
     '''
     Input Types:
         df = Pandas DataFrame
-        Col = Entered as string, defines number of quantiles. Only works on numeric fields
+        Col = Entered as string, defines which column to use for calculating quantiles. Only works on numeric fields!
+        NewCol = Entered as string, name of new column that contains quantiles
         Groups = Entered as int, controls amount of equal-sized groups
     Returns:
         Pandas dataframe containing user defined column (Col) converted to discrete equal-sized buckets
     '''
-    df[Col] = pd.qcut(df[Col].values, Groups).code + 1
+    df[NewColCol] = pd.qcut(df[Col].values, Groups).code + 1
     return df
 
-def ConvertMinMaxNorm(df, Col):
+def CalcMinMaxNorm(df, Col):
     '''
     For posterity: this function was formally written as "scale_me_baby" in partnership with MSBA Team 2 at the University of Notre Dame, circa 2018.
     
     Input Types:
         df = Pandas DataFrame
-        Col = Numeric field. Entered as string, defines column for normalization conversion
+        Col = Entered as string, defines which column to use for calculating min-max normalization. Only works on numeric fields!
+        NewCol = Entered as string, name of new column that contains normalized values
     Returns:
         Pandas dataframe containing user defined column (Col) converted to normalized data
-        This uses the min-max normalization method. 
+        This uses the min-max normalization method: https://en.wikipedia.org/wiki/Feature_scaling#Rescaling_(min-max_normalization)
     '''
-    df[Col] = (df[Col] - min(df[Col])) / (max(df[Col]) - min(df[Col]))
+    df[NewCol] = (df[Col] - min(df[Col])) / (max(df[Col]) - min(df[Col]))
     return df
