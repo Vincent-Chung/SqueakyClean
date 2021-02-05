@@ -26,3 +26,28 @@ def CalcDuration(df, NewColName, ColStartDate, ColEndDate):
     df[NewColName] = df[ColEndDate] - df[ColStartDate]
     df[NewColName] = df[NewColName].dt.days
     return df
+
+def DateExtract(df, ExtractType, Col, ColName):
+    '''
+    Input Types:
+        df = Pandas DataFrame
+        ExtractType = Input as string, this parameter defines element of date for extraction. Parameter must be "month" or "day" or "day_of_week"
+        Col = Date column targeted for element extraction
+        ColName = New column that contains extracted date element
+        
+    Returns:
+        Pandas dataframe containing new column with extracted element of targeted date column
+    '''        
+    if SplitType == 'month':
+        df[ColName] = pd.to_datetime(df[Col], format='%Y%m%d')
+        df[ColName] = df[ColName].dt.month                
+    elif SplitType == 'day':
+        df[ColName] = pd.to_datetime(df[Col], format='%Y%m%d')
+        df[ColName] = df[ColName].dt.day          
+    elif SplitType == 'day_of_week':
+        # Monday = 0; Sunday = 6
+        df[ColName] = pd.to_datetime(df[Col], format='%Y%m%d')
+        df[ColName] = df[ColName].dt.dayofweek 
+    else:
+        print('ERROR in SplitType. Value must be "month" or "day" or "day_of_week"')      
+    return df
