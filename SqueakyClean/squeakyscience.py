@@ -83,7 +83,7 @@ def EasyDrop(df, target):
     Target = df[target]
     Features = df.drop(columns = [target])
     
-    # Remove Features > 40% missing
+    # Remove Features > 90% missing
     TheList = pd.DataFrame(Features.isna().mean())
     TheList.columns = ['MissingPct']
     TheList = TheList.query('MissingPct > 0.9').index.tolist()
