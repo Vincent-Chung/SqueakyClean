@@ -65,3 +65,44 @@ def CalcMinMaxNorm(df, Col, NewCol):
     '''
     df[NewCol] = (df[Col] - min(df[Col])) / (max(df[Col]) - min(df[Col]))
     return df
+
+def EasyDrop(df, target):
+    '''
+    Input Types:
+    df = Pandas dataFrame
+    target = Dependent Variable
+
+    Returns:
+    Pandas dataFrame without:
+        Variables > 90% missing
+        Variables with constants
+        Variables with Low Std Deviation (data clustered around mean)
+        Variables with High cardinality (100+ uniqueness)
+    '''
+    # Split data: target and features
+    Target = df[target]
+    Features = df.drop(columns = [target])
+    
+    # Remove Features > 40% missing
+    TheList = pd.DataFrame(Features.isna().mean())
+    TheList.columns = ['MissingPct']
+    TheList = TheList.query('MissingPct > 0.9').index.tolist()
+    Features = (Features.drop(columns = TheList))
+    
+    # Split features into categorical and numeric
+    FeatsCat = Features.select_dtypes(include = 'object')
+    FeatsNums = Features.select_dtypes(include = np.number)
+    
+    # Remove Constants
+    FeatsCat = FeatsCat.loc[:,df.apply(pd.Series.nunique) != 1]
+    FeatsNums = FeatsNums.loc[:,FeatsNums.apply(pd.Series.nunique) != 1]
+    
+    # Find and remove low variance fields
+    FeatsNums = FeatsNums.drop(FeatsNums.std()[FeatsNums.std() < 0.5].index.values, axis=1)
+    
+    # Remove categorical fields with over 20 unique variables
+    FeatsCat = FeatsCat.loc[:,FeatsCat.apply(pd.Series.nunique) < 100]
+    
+    # Unite [Target] and [Features] dataframes
+    TheOutput = pd.concat([FeatsCat, FeatsNums, Target], axis = 1)
+    return TheOutput
