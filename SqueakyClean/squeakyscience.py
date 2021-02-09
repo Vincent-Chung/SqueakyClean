@@ -76,7 +76,6 @@ def EasyDrop(df, target):
     Pandas dataFrame without:
         Variables > 90% missing
         Variables with constants
-        Variables with Low Std Deviation (data clustered around mean)
         Variables with High cardinality (100+ uniqueness)
     '''
     # Split data: target and features
@@ -97,10 +96,7 @@ def EasyDrop(df, target):
     FeatsCat = FeatsCat.loc[:,df.apply(pd.Series.nunique) != 1]
     FeatsNums = FeatsNums.loc[:,FeatsNums.apply(pd.Series.nunique) != 1]
     
-    # Find and remove low variance fields
-    FeatsNums = FeatsNums.drop(FeatsNums.std()[FeatsNums.std() < 0.5].index.values, axis=1)
-    
-    # Remove categorical fields with over 20 unique variables
+    # Remove categorical fields with over 100 unique variables
     FeatsCat = FeatsCat.loc[:,FeatsCat.apply(pd.Series.nunique) < 100]
     
     # Unite [Target] and [Features] dataframes
