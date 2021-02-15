@@ -49,6 +49,7 @@ def DataTypeSwitcheroo(df, Col, Type):
         Pandas dataframe with type converted as defined with Col and Type args
     '''
     if Type == "datetime":
+        df[Col] = df[Col].astype(str)
         df[Col] = pd.to_datetime(df[Col])
     else:
         df[Col] = df[Col].astype(Type)
