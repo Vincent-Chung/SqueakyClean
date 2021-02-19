@@ -11,6 +11,7 @@ df_new = (df_original
           )
 '''
 import pandas as pd
+import datetime
 
 def FilterBetweenDates(df, ColSelectionDate, ColStartDate, ColEndDate):
     # This function doesn't work with int
@@ -25,6 +26,21 @@ def CalcDuration(df, NewColName, ColStartDate, ColEndDate):
     df[ColEndDate] = pd.to_datetime(df[ColEndDate], format='%Y%m%d')
     df[NewColName] = df[ColEndDate] - df[ColStartDate]
     df[NewColName] = df[NewColName].dt.days
+    return df
+
+def CalcDaysSinceX(df, Col, NewCol):
+    '''
+    Parameters:
+        df = pandas dataframe
+        Col = column of dates to use for date delta calc, enter as string  
+        NewCol = name of new column, enter as string
+        
+    Returns:
+        df = pandas dataframe with new column (NewCol) containing date delta
+    '''
+    df[Col] = pd.to_datetime(df[Col])
+    df[NewCol] = datetime.datetime.now() - df[Col]
+    df[NewCol] = df[NewCol].dt.days
     return df
 
 def DateExtract(df, ExtractType, Col, ColName):
