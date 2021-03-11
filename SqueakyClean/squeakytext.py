@@ -75,3 +75,14 @@ def LeftPadZero(df, Col, Len):
     df[Col] = df[Col].astype(str)
     df[Col] = df[Col].str.zfill(Len)
     return df
+
+def SmooshColNames(df):
+    '''
+    Input Types:
+    df = pandas dataframe
+
+    Returns:
+    Pandas dataframe with spaces removed from column names
+    '''
+    df.columns = df.columns.str.replace(' ', '') 
+    return df
