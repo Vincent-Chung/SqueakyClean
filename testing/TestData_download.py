@@ -4,8 +4,7 @@ import pandas as pd
 import numpy as np
 import census
 
-# https://api.census.gov/data/key_signup.html
-c = census.Census("Request API key from link presented on line 7")
+c = census.Census("Requires API key from US Census") # https://api.census.gov/data/key_signup.html
 
 # Functions
 def GetData(Variable, Geography):
