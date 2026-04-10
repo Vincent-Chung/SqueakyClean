@@ -1,5 +1,14 @@
+# MUSEUM PIECE: This project has migrated to pyproject.toml.
+# This file is kept for historical context only.
+
 from setuptools import setup
 
+if __name__ == "__main__":
+    raise RuntimeError(
+        "SqueakyClean now uses pyproject.toml for installation. "
+        "Please upgrade pip and install using 'pip install .'"
+    )
+    
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
     name='SqueakyClean',
