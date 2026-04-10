@@ -45,7 +45,7 @@ clean_df = sc.clean_dataframe(df)
 
 # 3. Enjoy your production-ready data
 print(clean_df.columns)
-# Output: Index(['full_name', 'phone', 'birth_date'], dtype='object')
+# Output: Index(['full_name', 'phone', 'birth_date'], dtype='object')](https://github.com/Vincent-Chung/SqueakyClean/tree/master)
 ```
 
 ## License
