@@ -7,7 +7,7 @@ name = "squeakyclean"
 version = "0.1.0"
 description = "Data wrangling functions to supplement pandas"
 readme = "README.md"
-license = {text = "TO BE DETERMINED"}
+license = {text = "MIT"}
 requires-python = ">=3.8"
 authors = [
     {name = "Vincent Chung", email = "NeedToMakePublicEmail@SomeEmail.com"},
