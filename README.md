@@ -32,20 +32,25 @@ Getting started with **SqueakyClean** is designed to be intuitive. Here is how t
 import pandas as pd
 import squeakyclean as sc
 
-# 1. Load a dataset with messy headers and mixed types
-df = pd.DataFrame({
-    "  Full Name  ": ["Vincent", "Jane"],
-    "Phone #!": ["123-456", "987-654"],
-    "Birth_Date": ["1988-01-01", "1992-05-15"]
-})
+# 1. Setup some messy sample data
+data = {
+    "User ID": [1, 2, 3],
+    "Account_Balance": ["$1,200", "$3,500", "ERROR"],
+    "Internal_Notes": ["Active", "Active", "Delete Me"],
+    "Irrelevant_Col": [None, None, None]
+}
+df = pd.DataFrame(data)
 
-# 2. Apply the SqueakyClean transformation
-# This will normalize headers to snake_case and handle basic type casting
-clean_df = sc.clean_dataframe(df)
+# 2. Method Chaining with SqueakyClean
+# This allows you to read the logic like a sentence.
+clean_df = (
+    df
+    .pipe(sc.ColDroppie, columns=["Irrelevant_Col"])
+    .pipe(sc.DeleteRowsContains, column="Internal_Notes", value="Delete Me")
+    .pipe(sc.DataTypeSwitcheroo, column="Account_Balance", to_type="float")
+)
 
-# 3. Enjoy your production-ready data
-print(clean_df.columns)
-# Output: Index(['full_name', 'phone', 'birth_date'], dtype='object')](https://github.com/Vincent-Chung/SqueakyClean/tree/master)
+print(clean_df)
 ```
 
 ## License
