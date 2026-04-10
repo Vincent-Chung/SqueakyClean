@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "squeakyclean"
+version = "0.1.0"
+description = "Data wrangling functions to supplement pandas"
+readme = "README.md"
+license = {text = "TO BE DETERMINED"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Vincent Chung", email = "NeedToMakePublicEmail@SomeEmail.com"},
+]
+maintainers = [
+    {name = "Vincent Chung", email = "NeedToMakePublicEmail@SomeEmail.com"},
+]
+keywords = ["pandas", "data-wrangling", "data-analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",  # Update this when you determine the license
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+]
+
+[project.urls]
+Homepage = "https://github.com/Vincent-Chung/SqueakyClean"
+Repository = "https://github.com/Vincent-Chung/SqueakyClean"
+Issues = "https://github.com/Vincent-Chung/SqueakyClean/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
