@@ -18,35 +18,43 @@ import pandas as pd
 
 def ColKeepie(df, ColList):
     '''
-    Input Types:
-        df = Pandas DataFrame
-        ColList = list type ['a','b','c','d']
+    Filters the DataFrame to keep only the specified columns.
+
+    Args:
+        df (pd.DataFrame): The source DataFrame.
+        ColList (list): A list of column names to retain.
+
     Returns:
-        Pandas dataframe containing only columns of dataframe as defined with ColList arg
+        pd.DataFrame: A DataFrame containing only the selected columns.
     '''
     return df[ColList]
 
-def ColDroppie(df,ColList):
+def ColDroppie(df, ColList):
     '''
-    Input Types:
-        df = Pandas DataFrame
-        ColList = list type ['a','b','c','d']
+    Filters the DataFrame to remove the specified columns.
+
+    Args:
+        df (pd.DataFrame): The source DataFrame.
+        ColList (list): A list of column names to remove.
+
     Returns:
-        Pandas dataframe removing all columns of dataframe as defined with ColList arg
+        pd.DataFrame: A DataFrame with the specified columns removed.
     '''
     df = df.drop(ColList, axis = 1)
     return df
 
 def DataTypeSwitcheroo(df, Col, Type):
     '''
-    Input Types:
-        df = Pandas DataFrame
-        Col = column name, as string
-        Type = 
-               If datetype desired, must enter "datetime" as string
-               Else takes built-in python types: int, float, str
+    Converts a column in the DataFrame to a specified data type.
+
+    Args:
+        df (pd.DataFrame): The source DataFrame.
+        Col (str): The column name to convert.
+        Type (str or type): The target data type. Use "datetime" for datetime conversion,
+            or built-in Python types (int, float, str).
+
     Returns:
-        Pandas dataframe with type converted as defined with Col and Type args
+        pd.DataFrame: The DataFrame with the specified column converted to the new type.
     '''
     if Type == "datetime":
         df[Col] = df[Col].astype(str)
@@ -56,12 +64,34 @@ def DataTypeSwitcheroo(df, Col, Type):
     return df
 
 def DeleteRowsContains(df, Col, Contains):
+    '''
+    Removes rows from the DataFrame where a column contains the specified substring.
+
+    Args:
+        df (pd.DataFrame): The source DataFrame.
+        Col (str): The column name to search.
+        Contains (str): The substring to search for.
+
+    Returns:
+        pd.DataFrame: The DataFrame with rows containing the substring removed.
+    '''
     df['ContainsFlag'] = df[Col].str.contains(Contains)
     df = df[df.ContainsFlag != True]
     df = df.drop(['ContainsFlag'], axis = 1)
     return df
 
 def KeepRowsContains(df, Col, Contains):
+    '''
+    Keeps only rows from the DataFrame where a column contains the specified substring.
+
+    Args:
+        df (pd.DataFrame): The source DataFrame.
+        Col (str): The column name to search.
+        Contains (str): The substring to search for.
+
+    Returns:
+        pd.DataFrame: The DataFrame with only rows containing the substring retained.
+    '''
     df['ContainsFlag'] = df[Col].str.contains(Contains)
     df = df[df.ContainsFlag == True]
     df = df.drop(['ContainsFlag'], axis = 1)
