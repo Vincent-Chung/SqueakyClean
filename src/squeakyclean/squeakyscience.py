@@ -1,4 +1,16 @@
-# Functions to help with preparing dataset for analytics, data science, machine learning
+'''
+Data science and machine learning preparation functions to supplement pandas.
+Intention is to cleanly abstract procedures for feature engineering and preprocessing.
+
+Example:
+
+df_new = (df_original
+          .pipe(calc_min_max_norm, Col='price', NewCol='price_scaled')
+          .pipe(calc_quantile, Col='price', NewCol='price_bucket', Groups=4)
+          .pipe(one_hot_encode, Col='category')
+          .pipe(easy_drop, target='target_column')
+          )
+'''
 
 #-------------------------------------------
 
@@ -57,7 +69,12 @@ def one_hot_encode(df, Col):
 
 def tfidf_clusters(df, Col, ColName, K, KeepPct):
     '''
-    Converts a text column into KMeans cluster labels using TF-IDF features.
+    Transforms high-cardinality text data into meaningful categorical clusters for machine learning.
+
+    This function addresses a common ML preprocessing challenge: text fields with many unique values
+    (high cardinality) are often removed during feature selection, but they may contain valuable
+    patterns. By converting text to TF-IDF features and clustering them, we create a lower-cardinality
+    categorical feature that captures semantic similarities in the text data.
 
     Args:
         df (pd.DataFrame): The source DataFrame.

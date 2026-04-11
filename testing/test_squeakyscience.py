@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from squeakyscience import (
+from squeakyclean import (
     calc_min_max_norm,
     calc_quantile,
     easy_drop,

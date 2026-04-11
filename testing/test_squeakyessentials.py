@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from squeakyessentials import (
+from squeakyclean import (
     ColDroppie,
     ColKeepie,
     DataTypeSwitcheroo,
