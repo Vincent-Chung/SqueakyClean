@@ -58,6 +58,27 @@ clean_df = (
 print(clean_df)
 ```
 
+## Core Modules
+
+| Module | Focus Area | Key Functions |
+| :--- | :--- | :--- |
+| **SqueakyEssentials** | Base Pandas abstractions | `ColKeepie`, `ColDroppie`, `DataTypeSwitcheroo` |
+| **SqueakyTime** | Chronological normalization | `DateCleaner`, `UnixToHuman`, `TimeDeltaBuckets` |
+| **SqueakyText** | NLP & String scrubbing | `WhitespaceScrubber`, `CaseStandardizer`, `RegexExtractioner` |
+| **SqueakyScience** | Statistical cleaning | `OutlierZScorer`, `NullImputer`, `DistributionScaler` |
+
+---
+
+## Development Roadmap
+
+- [x] **Modern Build System:** Full migration from `setup.py` to `pyproject.toml` and `src/` layout.
+- [ ] **API Documentation:** Standardize docstrings across all core modules to enable automated reference generation.
+- [ ] **Semantic API:** Finalize `__init__.py` hoisting to create a flat, intent-driven top-level API (e.g., `sc.ColKeepie`).
+- [ ] **Test Suite Refactor:** Transition legacy testing infrastructure to a modernized `pytest` framework.
+- [ ] **Documentation Site:** Deploy MkDocs-based site for comprehensive user guides and API docs.
+- [ ] **CI/CD Integration:** Implement GitHub Actions for automated linting, testing, and coverage reporting.
+- [ ] **Production Release:** Official 1.0.0 distribution to PyPI.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
