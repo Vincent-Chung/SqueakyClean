@@ -47,6 +47,21 @@ You can install the current development version directly from the repository:
 pip install git+[https://github.com/Vincent-Chung/SqueakyClean.git](https://github.com/Vincent-Chung/SqueakyClean.git)
 ```
 
+## Running tests
+
+This project uses `pytest` for automated tests. From the repository root, run:
+
+```bash
+pip install -e .[test]
+pytest testing
+```
+
+If you only want to run the module tests, use:
+
+```bash
+pytest testing/test_squeakyessentials.py
+```
+
 ## Quick Start
 
 Getting started with **SqueakyClean** is designed to be intuitive. Here is how to run a basic cleaning pipeline on a messy DataFrame:
