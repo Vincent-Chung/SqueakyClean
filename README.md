@@ -58,15 +58,6 @@ clean_df = (
 print(clean_df)
 ```
 
-## Core Modules
-
-| Module | Focus Area | Key Functions |
-| :--- | :--- | :--- |
-| **SqueakyEssentials** | Base Pandas abstractions | `ColKeepie`, `ColDroppie`, `DataTypeSwitcheroo` |
-| **SqueakyTime** | Chronological normalization | `DateCleaner`, `UnixToHuman`, `TimeDeltaBuckets` |
-| **SqueakyText** | NLP & String scrubbing | `WhitespaceScrubber`, `CaseStandardizer`, `RegexExtractioner` |
-| **SqueakyScience** | Statistical cleaning | `OutlierZScorer`, `NullImputer`, `DistributionScaler` |
-
 ---
 
 ## Development Roadmap
