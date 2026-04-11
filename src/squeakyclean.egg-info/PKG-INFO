@@ -1,3 +1,34 @@
+Metadata-Version: 2.4
+Name: squeakyclean
+Version: 0.1.0
+Summary: Data wrangling functions to supplement pandas
+Author-email: Vincent Chung <NeedToMakePublicEmail@SomeEmail.com>
+Maintainer-email: Vincent Chung <NeedToMakePublicEmail@SomeEmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Vincent-Chung/SqueakyClean
+Project-URL: Repository, https://github.com/Vincent-Chung/SqueakyClean
+Project-URL: Issues, https://github.com/Vincent-Chung/SqueakyClean/issues
+Keywords: pandas,data-wrangling,data-analysis
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Dynamic: license-file
+
 # SqueakyClean 🧹
 
 **SqueakyClean** is an opinionated Python library designed to simplify the "grunt work" of data preparation. By providing high-level abstractions for `pandas`, it helps data engineers and analysts transform messy, inconsistent datasets into "Squeaky Clean" dataframes ready for analysis or production.

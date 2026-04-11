@@ -15,6 +15,18 @@ df_new = (df_original
 
 import pandas as pd
 
+
+def _ensure_dataframe(df):
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError('df must be a pandas DataFrame')
+
+
+def _ensure_columns_exist(df, columns):
+    missing = [col for col in columns if col not in df.columns]
+    if missing:
+        raise KeyError(f"Columns not found in DataFrame: {missing}")
+
+
 def SubstringLeft(df, Col, SplitChar):
     '''
     Extracts the left portion of a string column up to a specified delimiter.
@@ -27,6 +39,9 @@ def SubstringLeft(df, Col, SplitChar):
     Returns:
         pd.DataFrame: The DataFrame with the specified column modified to contain only the left portion.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     new = df[Col].str.split(SplitChar, n=1, expand=True)
     df[Col] = new[0]
     df[Col] = df[Col].str.strip()  # Remove white spaces
@@ -44,6 +59,9 @@ def SubstringRight(df, Col, SplitChar):
     Returns:
         pd.DataFrame: The DataFrame with the specified column modified to contain only the right portion.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     new = df[Col].str.split(SplitChar, n=1, expand=True)
     df[Col] = new[1]
     df[Col] = df[Col].str.strip()  # Remove white spaces
@@ -62,6 +80,9 @@ def SubStringMiddle(df, Col, Start, End):
     Returns:
         pd.DataFrame: The DataFrame with the specified column modified to contain the substring.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     df[Col] = df[Col].str[Start - 1: End]
     return df
 
@@ -78,6 +99,9 @@ def FindReplace(df, Col, OldString, NewString):
     Returns:
         pd.DataFrame: The DataFrame with the specified replacements made.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     df[Col] = df[Col].str.replace(OldString, NewString)
     return df
 
@@ -93,6 +117,9 @@ def LeftPadZero(df, Col, Len):
     Returns:
         pd.DataFrame: The DataFrame with the specified column zero-padded.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     df[Col] = df[Col].astype(str)
     df[Col] = df[Col].str.zfill(Len)
     return df
@@ -107,5 +134,7 @@ def SmooshColNames(df):
     Returns:
         pd.DataFrame: The DataFrame with spaces removed from all column names.
     '''
+    _ensure_dataframe(df)
+
     df.columns = df.columns.str.replace(' ', '')
     return df

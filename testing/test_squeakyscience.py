@@ -14,8 +14,9 @@ def test_onehotencode_creates_indicator_columns():
     df = pd.DataFrame({'color': ['red', 'blue', 'blue'], 'value': [1, 2, 3]})
     result = one_hot_encode(df, 'color')
 
-    assert 'color_blue' in result.columns
-    assert 'color' not in result.columns
+    assert 'color_red' in result.columns  # drop_first=True drops the first alphabetical category (blue)
+    assert 'color_blue' not in result.columns  # first category alphabetically is dropped
+    assert 'color' not in result.columns  # original column is removed
     assert list(result['value']) == [1, 2, 3]
 
 

@@ -15,6 +15,18 @@ df_new = (df_original
 import pandas as pd
 import datetime
 
+
+def _ensure_dataframe(df):
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError('df must be a pandas DataFrame')
+
+
+def _ensure_columns_exist(df, columns):
+    missing = [col for col in columns if col not in df.columns]
+    if missing:
+        raise KeyError(f"Columns not found in DataFrame: {missing}")
+
+
 def FilterBetweenDates(df, ColSelectionDate, ColStartDate, ColEndDate):
     '''
     Filters rows to keep only those where a date column falls between start and end date ranges.
@@ -29,6 +41,9 @@ def FilterBetweenDates(df, ColSelectionDate, ColStartDate, ColEndDate):
         pd.DataFrame: The filtered DataFrame containing only rows where the selection date
             falls between the start and end date ranges.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [ColSelectionDate, ColStartDate, ColEndDate])
+
     df[ColSelectionDate] = df[ColSelectionDate].astype(float)
     df[ColStartDate] = df[ColStartDate].astype(float)
     df[ColEndDate] = df[ColEndDate].astype(float)
@@ -48,6 +63,9 @@ def CalcDuration(df, NewColName, ColStartDate, ColEndDate):
     Returns:
         pd.DataFrame: The DataFrame with a new column containing duration in days.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [ColStartDate, ColEndDate])
+
     df[ColStartDate] = pd.to_datetime(df[ColStartDate], format='%Y%m%d')
     df[ColEndDate] = pd.to_datetime(df[ColEndDate], format='%Y%m%d')
     df[NewColName] = df[ColEndDate] - df[ColStartDate]
@@ -66,6 +84,9 @@ def CalcDaysSinceX(df, Col, NewCol):
     Returns:
         pd.DataFrame: The DataFrame with a new column containing days since the specified dates.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     df[Col] = pd.to_datetime(df[Col])
     df[NewCol] = datetime.datetime.now() - df[Col]
     df[NewCol] = df[NewCol].dt.days
@@ -84,6 +105,9 @@ def DateExtract(df, ExtractType, Col, ColName):
     Returns:
         pd.DataFrame: The DataFrame with a new column containing the extracted date component.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
     if ExtractType == 'month':
         df[ColName] = pd.to_datetime(df[Col], format='%Y%m%d')
         df[ColName] = df[ColName].dt.month

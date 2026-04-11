@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/squeakyclean/__init__.py
+src/squeakyclean/squeakyessentials.py
+src/squeakyclean/squeakyscience.py
+src/squeakyclean/squeakytext.py
+src/squeakyclean/squeakytime.py
+src/squeakyclean.egg-info/PKG-INFO
+src/squeakyclean.egg-info/SOURCES.txt
+src/squeakyclean.egg-info/dependency_links.txt
+src/squeakyclean.egg-info/requires.txt
+src/squeakyclean.egg-info/top_level.txt
