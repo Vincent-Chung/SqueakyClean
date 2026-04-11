@@ -10,11 +10,16 @@
 
 ## Why SqueakyClean?
 
-Data cleaning is often 80% of the work. This library aims to reduce that friction by automating common tasks with a focus on readability and maintainable code:
+### The Historical Impetus: From Verbosity to Legibility
+SqueakyClean was born from a recurring frustration in the data ecosystem: **"The Wall of Pandas."** Traditional data cleaning often results in brittle scripts filled with repetitive `df.assign()`, `df.drop()`, and nested regex calls. While functional, these scripts are difficult to audit and a nightmare to maintain. The original goal of this project was to **abstract the mechanical "how" into a semantic "what,"** turning 50 lines of verbose manipulation into 5 lines of **intent-driven logic.**
 
-* **Schema Normalization:** Automatically sanitize column names (snake_case, removing special characters, etc.).
-* **Pandas Abstractions:** Perform complex data transformations without writing repetitive boilerplate.
-* **Built for Reliability:** Designed to help analysts move from "ad-hoc scripts" to "production-ready pipelines."
+### The Evolution: Trust in the Age of "Vibe Coding"
+In an era where code can be generated in seconds via LLMs (the "Vibe Coding" shift), the bottleneck has moved from *writing* code to **validating and trusting** it. 
+
+SqueakyClean provides the **Semantic Guardrails** necessary for modern development:
+* **Reliability:** Instead of relying on a dozen different AI-generated snippets for the same task, SqueakyClean provides a standardized, tested "contract" for your data.
+* **Intent-Driven Design:** By using a consistent vocabulary of cleaning "verbs" (`ColKeepie`, `DataTypeSwitcheroo`), your pipelines remain readable to humans and auditable by AI, preventing the accumulation of prompt-engineered technical debt.
+* **Human-Centric Engineering:** We focus on reducing syntax friction so architects can focus on the high-level data lifecycle and the human impact of the resulting analytics.
 
 ## Installation
 
