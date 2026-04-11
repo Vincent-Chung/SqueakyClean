@@ -21,6 +21,24 @@ SqueakyClean provides the **Semantic Guardrails** necessary for modern developme
 * **Intent-Driven Design:** By using a consistent vocabulary of cleaning "verbs" (`ColKeepie`, `DataTypeSwitcheroo`), your pipelines remain readable to humans and auditable by AI, preventing the accumulation of prompt-engineered technical debt.
 * **Human-Centric Engineering:** We focus on reducing syntax friction so architects can focus on the high-level data lifecycle and the human impact of the resulting analytics.
 
+## The Philosophy: Intent vs. Implementation
+
+In the shift toward AI-assisted development, a new friction has emerged between speed and stability. **SqueakyClean** is built to bridge that gap.
+
+### 1. The Risk: Prompt-Engineered Technical Debt
+"Vibe Coding" allows for rapid prototyping, but it often accumulates **Prompt-Engineered Technical Debt**. This occurs when AI generates "one-off" snippets that are:
+* **Fragile:** Lacking defensive checks for schema drift or missing data.
+* **Inconsistent:** Using different logic or naming conventions for the same task across various modules.
+* **Opaque:** Harder to peer-review because the developer's "intent" is buried in low-level, verbose syntax.
+
+### 2. The Solution: Intent-Driven Design
+SqueakyClean implements **Intent-Driven Design** by providing a curated vocabulary of data cleaning "verbs." 
+* **Semantic Interface:** Instead of prompting an LLM to "find the column 'Price', convert it to float, and handle errors," you use `sc.DataTypeSwitcheroo`. 
+* **Trusted Abstraction:** The library ensures that the logic remains tested and standardized—regardless of whether the pipeline was architected by a human or a prompt.
+* **Future-Proofing:** By using high-level abstractions, you ensure your codebase remains readable to humans and auditable by AI, preventing the "Wall of Pandas" from returning.
+
+---
+
 ## Installation
 
 You can install the current development version directly from the repository:
