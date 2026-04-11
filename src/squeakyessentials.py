@@ -16,6 +16,17 @@ df_new = (df_original
 import pandas as pd
 
 
+def _ensure_dataframe(df):
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError('df must be a pandas DataFrame')
+
+
+def _ensure_columns_exist(df, columns):
+    missing = [col for col in columns if col not in df.columns]
+    if missing:
+        raise KeyError(f"Columns not found in DataFrame: {missing}")
+
+
 def ColKeepie(df, ColList):
     '''
     Filters the DataFrame to keep only the specified columns.
@@ -27,6 +38,8 @@ def ColKeepie(df, ColList):
     Returns:
         pd.DataFrame: A DataFrame containing only the selected columns.
     '''
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, ColList)
     return df[ColList]
 
 def ColDroppie(df, ColList):
@@ -40,8 +53,9 @@ def ColDroppie(df, ColList):
     Returns:
         pd.DataFrame: A DataFrame with the specified columns removed.
     '''
-    df = df.drop(ColList, axis = 1)
-    return df
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, ColList)
+    return df.drop(ColList, axis=1)
 
 def DataTypeSwitcheroo(df, Col, Type):
     '''
@@ -56,11 +70,19 @@ def DataTypeSwitcheroo(df, Col, Type):
     Returns:
         pd.DataFrame: The DataFrame with the specified column converted to the new type.
     '''
-    if Type == "datetime":
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
+    if Type == 'datetime':
         df[Col] = df[Col].astype(str)
         df[Col] = pd.to_datetime(df[Col])
-    else:
+    elif Type in {int, float, str} or isinstance(Type, type):
         df[Col] = df[Col].astype(Type)
+    else:
+        raise TypeError(
+            'Type must be "datetime" or a valid Python type like int, float, or str'
+        )
+
     return df
 
 def DeleteRowsContains(df, Col, Contains):
@@ -75,10 +97,11 @@ def DeleteRowsContains(df, Col, Contains):
     Returns:
         pd.DataFrame: The DataFrame with rows containing the substring removed.
     '''
-    df['ContainsFlag'] = df[Col].str.contains(Contains)
-    df = df[df.ContainsFlag != True]
-    df = df.drop(['ContainsFlag'], axis = 1)
-    return df
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
+    mask = df[Col].astype(str).str.contains(Contains, na=False)
+    return df.loc[~mask].copy()
 
 def KeepRowsContains(df, Col, Contains):
     '''
@@ -92,7 +115,8 @@ def KeepRowsContains(df, Col, Contains):
     Returns:
         pd.DataFrame: The DataFrame with only rows containing the substring retained.
     '''
-    df['ContainsFlag'] = df[Col].str.contains(Contains)
-    df = df[df.ContainsFlag == True]
-    df = df.drop(['ContainsFlag'], axis = 1)
-    return df
+    _ensure_dataframe(df)
+    _ensure_columns_exist(df, [Col])
+
+    mask = df[Col].astype(str).str.contains(Contains, na=False)
+    return df.loc[mask].copy()

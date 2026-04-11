@@ -33,6 +33,9 @@ dependencies = [
     "pandas",
 ]
 
+[project.optional-dependencies]
+test = ["pytest"]
+
 [project.urls]
 Homepage = "https://github.com/Vincent-Chung/SqueakyClean"
 Repository = "https://github.com/Vincent-Chung/SqueakyClean"
