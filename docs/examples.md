@@ -9,7 +9,67 @@ import squeakyclean as sc
 
 ---
 
-## Data Essentials (`squeakyclean.squeakyessentials`)
+## Method Chaining: The Power of SqueakyClean
+
+**SqueakyClean shines when you chain functions together** using pandas `.pipe()`. This creates readable, intent-driven data cleaning pipelines that are easy to understand and maintain.
+
+### Complete Data Cleaning Pipeline
+
+```python
+import pandas as pd
+import squeakyclean as sc
+
+# Raw, messy data
+raw_data = {
+    'Customer_ID': ['001', '002', '003', '004'],
+    'Full_Name': ['John Doe', 'Jane Smith', 'Bob Johnson', 'Alice Brown'],
+    'Account_Balance': ['$1,250.00', '$3,400.50', 'ERROR', '$750.25'],
+    'Signup_Date': ['20230115', '20230220', '20230310', '20230405'],
+    'Status': ['Active', 'Active', 'Inactive', 'Active'],
+    'Internal_Notes': ['Good customer', 'Prefers email', 'Remove', 'New customer'],
+    'Temp_Column': [None, None, None, None]
+}
+
+df = pd.DataFrame(raw_data)
+
+# Complete cleaning pipeline - read like a story!
+clean_df = (
+    df
+    # Remove unnecessary columns
+    .pipe(sc.ColDroppie, columns=['Temp_Column'])
+    # Remove invalid rows
+    .pipe(sc.DeleteRowsContains, column='Internal_Notes', value='Remove')
+    # Clean and convert data types
+    .pipe(sc.DataTypeSwitcheroo, column='Customer_ID', to_type='int')
+    .pipe(sc.DataTypeSwitcheroo, column='Account_Balance', to_type='float')
+    # Extract date components
+    .pipe(sc.DateExtract, ExtractType='month', Col='Signup_Date', ColName='signup_month')
+    # Clean text data
+    .pipe(sc.SubstringLeft, Col='Full_Name', Delimiter=' ', NewCol='first_name')
+    .pipe(sc.SubstringRight, Col='Full_Name', Delimiter=' ', NewCol='last_name')
+    # Final column selection
+    .pipe(sc.ColKeepie, columns=[
+        'Customer_ID', 'first_name', 'last_name',
+        'Account_Balance', 'signup_month', 'Status'
+    ])
+)
+
+print("Final clean dataset:")
+print(clean_df)
+print(f"\nData types:\n{clean_df.dtypes}")
+```
+
+**Why method chaining works so well:**
+- **Readable**: Each step is clearly documented with comments
+- **Composable**: Functions work together seamlessly
+- **Maintainable**: Easy to add/remove/reorder steps
+- **Intent-driven**: The code reads like the data cleaning story you want to tell
+
+---
+
+## Individual Function Examples
+
+Now let's explore each function in detail, organized by module.
 
 ### ColKeepie - Keep Only Specified Columns
 
@@ -364,53 +424,5 @@ print(clean_df.columns)
 ```
 
 ---
-
-## Method Chaining Examples
-
-### Complete Data Cleaning Pipeline
-
-```python
-import pandas as pd
-import squeakyclean as sc
-
-# Raw, messy data
-raw_data = {
-    'Customer_ID': ['001', '002', '003', '004'],
-    'Full_Name': ['John Doe', 'Jane Smith', 'Bob Johnson', 'Alice Brown'],
-    'Account_Balance': ['$1,250.00', '$3,400.50', 'ERROR', '$750.25'],
-    'Signup_Date': ['20230115', '20230220', '20230310', '20230405'],
-    'Status': ['Active', 'Active', 'Inactive', 'Active'],
-    'Internal_Notes': ['Good customer', 'Prefers email', 'Remove', 'New customer'],
-    'Temp_Column': [None, None, None, None]
-}
-
-df = pd.DataFrame(raw_data)
-
-# Complete cleaning pipeline
-clean_df = (
-    df
-    # Remove unnecessary columns
-    .pipe(sc.ColDroppie, columns=['Temp_Column'])
-    # Remove invalid rows
-    .pipe(sc.DeleteRowsContains, column='Internal_Notes', value='Remove')
-    # Clean and convert data types
-    .pipe(sc.DataTypeSwitcheroo, column='Customer_ID', to_type='int')
-    .pipe(sc.DataTypeSwitcheroo, column='Account_Balance', to_type='float')
-    # Extract date components
-    .pipe(sc.DateExtract, ExtractType='month', Col='Signup_Date', ColName='signup_month')
-    # Clean text data
-    .pipe(sc.SubstringLeft, Col='Full_Name', Delimiter=' ', NewCol='first_name')
-    .pipe(sc.SubstringRight, Col='Full_Name', Delimiter=' ', NewCol='last_name')
-    # Final column selection
-    .pipe(sc.ColKeepie, columns=[
-        'Customer_ID', 'first_name', 'last_name',
-        'Account_Balance', 'signup_month', 'Status'
-    ])
-)
-
-print("Final clean dataset:")
-print(clean_df)
-print(f"\nData types:\n{clean_df.dtypes}")
-```
 
 This examples file demonstrates the full range of SqueakyClean's capabilities and shows how functions can be chained together for comprehensive data cleaning workflows.
