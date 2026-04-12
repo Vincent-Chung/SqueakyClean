@@ -64,7 +64,7 @@ pytest testing/test_squeakyessentials.py
 
 ## Quick Start
 
-Getting started with **SqueakyClean** is designed to be intuitive. Here is how to run a basic cleaning pipeline on a messy DataFrame:
+Here is how to run a basic cleaning pipeline on a messy DataFrame:
 
 ```python
 import pandas as pd
