@@ -79,13 +79,17 @@ data = {
 }
 df = pd.DataFrame(data)
 
-# 2. Method Chaining with SqueakyClean
-# This allows you to read the logic like a sentence.
+# 2. The Squeaky Pipeline: Intent-Driven & Readable
 clean_df = (
     df
-    .pipe(sc.ColDroppie, columns=["Irrelevant_Col"])
-    .pipe(sc.DeleteRowsContains, column="Internal_Notes", value="Delete Me")
-    .pipe(sc.DataTypeSwitcheroo, column="Account_Balance", to_type="float")
+    # Squeaky: Keep only the columns that matter
+    .pipe(sc.ColKeepie, columns=['User ID', 'Account_Balance', 'Internal_Notes'])
+    
+    # Native Pandas: Clean up strings before casting
+    .assign(Account_Balance = lambda x: x['Account_Balance'].str.replace('[\$,]', '', regex=True))
+    
+    # Squeaky: Remove rows based on human-readable patterns
+    .pipe(sc.DeleteRowsContains, column='Internal_Notes', pattern='Delete Me')
 )
 
 print(clean_df)
