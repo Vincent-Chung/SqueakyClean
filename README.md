@@ -1,6 +1,6 @@
 # SqueakyClean 🧹
 
-**SqueakyClean** is an opinionated Python library designed to simplify the "grunt work" of data preparation. By providing high-level abstractions for `pandas`, it helps data engineers and analysts transform messy, inconsistent datasets into "Squeaky Clean" dataframes ready for analysis or production.
+**SqueakyClean** is an opinionated Python library designed to eliminate the verbosity of standard data preparation. As a semantic supplement to pandas, it abstracts mechanical operations into intent-driven "verbs," allowing engineers to transform messy datasets into production-ready dataframes with cleaner, more auditable code.
 
 > [!IMPORTANT]
 > **Project Status: Early Development & Refactoring**
