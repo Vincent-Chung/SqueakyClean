@@ -37,6 +37,10 @@ SqueakyClean implements **Intent-Driven Design** by providing a curated vocabula
 * **Trusted Abstraction:** The library ensures that the logic remains tested and standardized—regardless of whether the pipeline was architected by a human or a prompt.
 * **Future-Proofing:** By using high-level abstractions, you ensure your codebase remains readable to humans and auditable by AI, preventing the "Wall of Pandas" from returning.
 
+### 3. Context Window Containment
+SqueakyClean *contains* the context window by replacing multiple lines of repetitive logic (regex, string cleaning, type casting) with a single, high-intent verb.
+Methods like sc.ColKeepie or sc.SmooshColNames act as semantic compression. They tell the LLM (and the human) exactly what is happening without forcing it to process the boilerplate implementation details, saving valuable token space for the actual business logic. In the AI age, this code verbosity is a tax on your context window. SqueakyClean compresses complex manipulations into semantic tokens, ensuring that LLMs focus on your intent rather than getting lost in the *noise* of boilerplate data preparation.
+
 ---
 
 ## Installation
